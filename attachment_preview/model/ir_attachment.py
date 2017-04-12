@@ -22,20 +22,16 @@ import collections
 import os.path
 import mimetypes
 import base64
-from openerp.osv.orm import Model
+from odoo import models, api
 
-
-class IrAttachment(Model):
+class IrAttachment(models.Model):
     _inherit = 'ir.attachment'
 
-    def get_binary_extension(
-            self, cr, uid, model, ids, binary_field, filename_field=None,
-            context=None):
+    #def get_binary_extension(self, cr, uid, model, ids, binary_field, filename_field=None,context=None):
+    @api.model
+    def get_binary_extension(self, model, ids, binary_field, filename_field=None):
         result = {}
-        for this in self.pool[model].browse(
-                cr, uid,
-                ids if isinstance(ids, collections.Iterable) else [ids],
-                context=context):
+        for this in self.env[model].browse(ids if isinstance(ids, collections.Iterable) else [ids]):
             if not this.id:
                 result[this.id] = False
                 continue
@@ -63,6 +59,8 @@ class IrAttachment(Model):
             result[this.id] = (extension or '').lstrip('.').lower()
         return result if isinstance(ids, collections.Iterable) else result[ids]
 
-    def get_attachment_extension(self, cr, uid, ids, context=None):
-        return self.get_binary_extension(
-            cr, uid, self._name, ids, 'datas', 'datas_fname', context=context)
+
+    #def get_attachment_extension(self, cr, uid, ids, context=None):
+    @api.model
+    def get_attachment_extension(self, ids):
+        return self.get_binary_extension( self._name, ids, 'datas', 'datas_fname')
