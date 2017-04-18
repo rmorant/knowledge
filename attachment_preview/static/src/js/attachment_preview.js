@@ -20,7 +20,7 @@
 //############################################################################
 odoo.define('attachment_preview', function(require) {
 "use strict";
-var viewerModule = 'attachment_preview'
+var moduleName = 'attachment_preview'
 var core = require('web.core');
 var _t = core._t;
 var Model = require('web.Model');
@@ -32,7 +32,7 @@ function show_preview(
             attachment_id, attachment_url, attachment_extension,
             attachment_title) {
     var url = (window.location.origin || '') +
-        '/'+viewerModule+'/static/lib/ViewerJS/index.html' +
+        '/'+moduleName+'/static/lib/ViewerJS/index.html' +
         '?type=' + encodeURIComponent(attachment_extension) +
         '&title=' + encodeURIComponent(attachment_title) +
         '#' +

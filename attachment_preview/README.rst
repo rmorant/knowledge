@@ -32,6 +32,8 @@ Contributors
 
 * Holger Brunn <hbrunn@therp.nl>
 
+* Rafa Morant <rmorant@albasoft.com>
+
 Maintainer
 ----------
 
